@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @CrossOrigin("*")
@@ -48,4 +50,11 @@ public class ToDoController {
     {
         return toDoService.deleteById(id);
     }
+
+    @GetMapping("/getAll")
+    public List<ToDo> getAll()
+    {
+        return toDoService.getAll();
+    }
+
 }
