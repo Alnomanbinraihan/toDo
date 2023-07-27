@@ -52,9 +52,11 @@ public class ToDoController {
     }
 
     @GetMapping("/getAll")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<ToDo> getAll()
     {
         return toDoService.getAll();
     }
+
 
 }
