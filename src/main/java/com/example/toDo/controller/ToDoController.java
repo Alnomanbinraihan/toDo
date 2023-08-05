@@ -28,7 +28,7 @@ public class ToDoController {
     }
 
     @PostMapping("/create")
-    @PreAuthorize("hasAuthority('admin','user')")
+    @PreAuthorize("hasAuthority('admin')")
     public ToDo createToDo(@RequestBody ToDo toDo)
     {
         return toDoService.create(toDo);
@@ -54,7 +54,6 @@ public class ToDoController {
     }
 
     @GetMapping("/getAll")
-    @PreAuthorize("hasAuthority('admin')")
     public List<ToDo> getAll()
     {
         return toDoService.getAll();

@@ -24,7 +24,7 @@ public class ToDoService {
         Optional<ToDo> existingToDo = toDoRepository.findById(id);
 
         if (existingToDo.isPresent()) {
-            existingToDo.get().setStatus(toDo.getStatus());
+            existingToDo.get().setOpen(toDo.getOpen());
             return toDoRepository.save(existingToDo.get());
         }
         return new ToDo();
@@ -34,7 +34,7 @@ public class ToDoService {
         Optional<ToDo> existingToDo = toDoRepository.findById(id);
 
         if (existingToDo.isPresent()) {
-            existingToDo.get().setStatus("Close");
+            existingToDo.get().setOpen(false);
             return toDoRepository.save(existingToDo.get());
         }
         return new ToDo();
