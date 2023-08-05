@@ -61,7 +61,8 @@ public class ToDoService {
 
     public List<ToDo> getAll() {
 
-        List<ToDo> toDoList = toDoRepository.findAll();
+        //List<ToDo> toDoList = toDoRepository.findAll();
+        List<ToDo> toDoList = toDoRepository.findAllBySorting();
 
         for (ToDo toDo : toDoList) {
             try {
