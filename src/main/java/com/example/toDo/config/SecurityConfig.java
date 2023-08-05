@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/saveUser","/authenticate").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/getAll","/delete/{id}","/update/{id}","/create","/closeToDo/{id}","/**")
+                .authorizeHttpRequests().requestMatchers("/getAll","/delete/{id}","/update/{id}","/create","/closeToDo/{id}","/uploadPic/{id}","/**")
                 .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

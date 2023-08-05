@@ -61,7 +61,7 @@ public class ToDoController {
         return toDoService.getAll();
     }
 
-    @PostMapping("/{id}/uploadPic")
+    @PostMapping("/uploadPic/{id}")
     public String uploadPic(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
         try {
             String picPath = toDoService.uploadAndResizePic(id, file);
