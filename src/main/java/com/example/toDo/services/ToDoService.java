@@ -59,12 +59,13 @@ public class ToDoService {
         return toDoRepository.findAll();
     }
 
-    private static final String UPLOAD_DIR = "path/upload/directory/";
+    private static final String UPLOAD_DIR = "C:/path/upload/directory/";
 
     @Transactional
     public String uploadAndResizePic(Long toDoId, MultipartFile file) throws IOException {
         // Save the original image
         String originalFileName = file.getOriginalFilename();
+        assert originalFileName != null;
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
         String originalFilePath = UPLOAD_DIR + toDoId + "_original" + extension;
         File originalFile = new File(originalFilePath);
