@@ -23,4 +23,6 @@ public class ToDo {
     private String originalPicPath;
     private String thumbnailPicPath;
 
+    private String img;
+
 }

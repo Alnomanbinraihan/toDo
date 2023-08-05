@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,8 +58,27 @@ public class ToDoService {
             return "failed to deleted!";
         }
     }
+
     public List<ToDo> getAll() {
-        return toDoRepository.findAll();
+
+        List<ToDo> toDoList = toDoRepository.findAll();
+
+        for (ToDo toDo : toDoList) {
+            try {
+                if (toDo.getThumbnailPicPath() != null) {
+                    Path imagePath = Paths.get(toDo.getThumbnailPicPath());
+                    if (Files.exists(imagePath) && Files.isReadable(imagePath)) {
+                        byte[] imageBytes = Files.readAllBytes(imagePath);
+                        String base64Image = java.util.Base64.getEncoder().encodeToString(imageBytes);
+                        toDo.setImg(base64Image);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return toDoList;
     }
 
     private static final String UPLOAD_DIR = "C:/path/upload/directory/";

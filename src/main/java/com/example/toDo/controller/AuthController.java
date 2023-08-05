@@ -3,8 +3,10 @@ package com.example.toDo.controller;
 
 import com.example.toDo.Dto.AuthRequest;
 import com.example.toDo.Dto.TokenDto;
+import com.example.toDo.entity.ToDo;
 import com.example.toDo.services.JwtService;
 
+import com.example.toDo.services.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 
@@ -19,6 +21,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
