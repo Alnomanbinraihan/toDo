@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -57,6 +59,17 @@ public class ToDoController {
     public List<ToDo> getAll()
     {
         return toDoService.getAll();
+    }
+
+    @PostMapping("/{id}/uploadPic")
+    public String uploadPic(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        try {
+            String picPath = toDoService.uploadAndResizePic(id, file);
+            return picPath;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error uploading image.";
+        }
     }
 
 

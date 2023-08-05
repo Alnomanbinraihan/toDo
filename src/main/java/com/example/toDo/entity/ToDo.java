@@ -20,4 +20,7 @@ public class ToDo {
         this.open = true;
     }
 
+    private String originalPicPath;
+    private String thumbnailPicPath;
+
 }
