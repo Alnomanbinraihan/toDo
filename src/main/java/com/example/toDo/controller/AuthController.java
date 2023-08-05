@@ -34,7 +34,13 @@ public class AuthController {
     public TokenDto authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getUsername());
+            String s= authentication.getAuthorities().toString();
+            TokenDto tokenDto=jwtService.generateToken(authRequest.getUsername());
+            if(!authentication.getAuthorities().isEmpty())
+            {
+                tokenDto.setRoles(authentication.getAuthorities().toString());
+            }
+            return tokenDto;
         } else {
             throw new UsernameNotFoundException("invalid user request !");
         }

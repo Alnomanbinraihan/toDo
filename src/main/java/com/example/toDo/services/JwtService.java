@@ -58,6 +58,7 @@ public class JwtService {
         Map<String,Object> claims=new HashMap<>();
         TokenDto tokenDto= new TokenDto();
         tokenDto.setToken(createToken(claims,userName));
+        //tokenDto.setRoles(createToken(claims,roles));
         return tokenDto;
     }
 
