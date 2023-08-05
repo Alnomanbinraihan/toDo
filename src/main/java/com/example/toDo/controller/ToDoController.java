@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 
 public class ToDoController {
 
@@ -26,12 +26,14 @@ public class ToDoController {
     {
         return userService.saveUser(userInfo);
     }
-    @PostMapping("/create")
 
+    @PostMapping("/create")
+    @PreAuthorize("hasAuthority('admin','user')")
     public ToDo createToDo(@RequestBody ToDo toDo)
     {
         return toDoService.create(toDo);
     }
+
     @PutMapping("/update/{id}")
     public ToDo updateToDo(@PathVariable Long id,@RequestBody ToDo toDo)
     {
@@ -45,14 +47,14 @@ public class ToDoController {
     }
 
     @DeleteMapping("/delete/{id}")
-
+    @PreAuthorize("hasAuthority('admin')")
     public String deleteToDo(@PathVariable Long id)
     {
         return toDoService.deleteById(id);
     }
 
     @GetMapping("/getAll")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('admin')")
     public List<ToDo> getAll()
     {
         return toDoService.getAll();

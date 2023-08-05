@@ -1,5 +1,6 @@
 package com.example.toDo.services;
 
+import com.example.toDo.Dto.TokenDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -53,9 +54,11 @@ public class JwtService {
     }
 
 
-    public String generateToken(String userName){
+    public TokenDto generateToken(String userName){
         Map<String,Object> claims=new HashMap<>();
-        return createToken(claims,userName);
+        TokenDto tokenDto= new TokenDto();
+        tokenDto.setToken(createToken(claims,userName));
+        return tokenDto;
     }
 
     private String createToken(Map<String, Object> claims, String userName) {

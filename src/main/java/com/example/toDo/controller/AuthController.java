@@ -2,6 +2,7 @@ package com.example.toDo.controller;
 
 
 import com.example.toDo.Dto.AuthRequest;
+import com.example.toDo.Dto.TokenDto;
 import com.example.toDo.services.JwtService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired
@@ -30,7 +31,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/authenticate")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    public TokenDto authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
             return jwtService.generateToken(authRequest.getUsername());
